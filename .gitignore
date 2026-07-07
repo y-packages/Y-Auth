@@ -1,0 +1,13 @@
+/vendor/
+/.phpunit.cache/
+/.phpstan.cache/
+/.env
+
+# IDE and Editor Files
+/.idea/
+/.vscode/
+/*.suo
+/*.ntvs*
+/*.njsproj
+/*.sln
+/*.sw?
