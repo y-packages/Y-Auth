@@ -125,13 +125,14 @@ class YakNetProvider extends AbstractProvider
      * Generates a fully-functioning login button widget HTML.
      *
      * @param string $state Secure state token to prevent CSRF.
-     * @param array<string, mixed> $options Custom options (e.g. 'theme' => 'dark'|'light').
+     * @param array<string, mixed> $options Custom options (e.g. 'theme' => 'dark'|'light', 'text' => 'YakNet ile Kayıt Ol').
      */
     public function getLoginButtonHtml(string $state = '', array $options = []): string
     {
         $clientId = $this->clientId;
         $redirectUri = $this->redirectUri;
         $theme = isset($options['theme']) && is_string($options['theme']) ? $options['theme'] : 'light';
+        $text = isset($options['text']) && is_string($options['text']) ? $options['text'] : 'YakNet ile Giriş Yap';
         $baseUrl = $this->baseUrl;
 
         return <<<HTML
@@ -140,7 +141,8 @@ class YakNetProvider extends AbstractProvider
     client-id="{$clientId}" 
     redirect-uri="{$redirectUri}" 
     state="{$state}" 
-    theme="{$theme}">
+    theme="{$theme}"
+    text="{$text}">
 </yaknet-login-button>
 HTML;
     }
