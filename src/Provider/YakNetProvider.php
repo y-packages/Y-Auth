@@ -136,7 +136,7 @@ class YakNetProvider extends AbstractProvider
         $baseUrl = $this->baseUrl;
 
         return <<<HTML
-<script src="{$baseUrl}/js/y-auth-button.js" async defer></script>
+<script src="{$baseUrl}/js/y-auth-button.js?v=1.1.2" async defer></script>
 <yaknet-login-button 
     client-id="{$clientId}" 
     redirect-uri="{$redirectUri}" 
