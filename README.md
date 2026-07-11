@@ -32,9 +32,28 @@ $provider = new YakNetProvider([
 ]);
 ```
 
-### 2. Redirect to Authorization URL
+### 2. Display the Login Button (Dynamic Button Mode - Recommended)
 
-Redirect the user to the provider's authorization endpoint. We generate and store a secure state parameter to prevent CSRF attacks:
+You can render a pre-styled, dynamically updated login button from the server using a single line of PHP:
+
+```php
+session_start();
+
+// Generate the secure state token
+$state = $provider->getState();
+$_SESSION['oauth2state'] = $state;
+
+// Render the button (outputs the script loader and custom element)
+echo $provider->getLoginButtonHtml($state, [
+    'theme' => 'light' // Optional: 'light' or 'dark'
+]);
+```
+
+---
+
+### 3. Redirect to Authorization URL (Redirect Mode - Manual)
+
+Alternatively, if you want to handle the redirection manually (e.g. via controller redirects):
 
 ```php
 session_start();

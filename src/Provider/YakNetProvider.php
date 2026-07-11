@@ -112,4 +112,36 @@ class YakNetProvider extends AbstractProvider
     {
         return new YakNetResourceOwner($response);
     }
+
+    /**
+     * Get the base URL of the YakNet Auth server.
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * Generates a fully-functioning login button widget HTML.
+     *
+     * @param string $state Secure state token to prevent CSRF.
+     * @param array<string, mixed> $options Custom options (e.g. 'theme' => 'dark'|'light').
+     */
+    public function getLoginButtonHtml(string $state = '', array $options = []): string
+    {
+        $clientId = $this->clientId;
+        $redirectUri = $this->redirectUri;
+        $theme = isset($options['theme']) && is_string($options['theme']) ? $options['theme'] : 'light';
+        $baseUrl = $this->baseUrl;
+
+        return <<<HTML
+<script src="{$baseUrl}/js/y-auth-button.js" async defer></script>
+<yaknet-login-button 
+    client-id="{$clientId}" 
+    redirect-uri="{$redirectUri}" 
+    state="{$state}" 
+    theme="{$theme}">
+</yaknet-login-button>
+HTML;
+    }
 }
