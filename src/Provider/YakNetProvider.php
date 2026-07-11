@@ -142,7 +142,8 @@ class YakNetProvider extends AbstractProvider
     redirect-uri="{$redirectUri}" 
     state="{$state}" 
     theme="{$theme}"
-    text="{$text}">
+    text="{$text}"
+    base-url="{$baseUrl}">
 </yaknet-login-button>
 HTML;
     }
