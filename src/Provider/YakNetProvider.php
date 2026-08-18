@@ -129,21 +129,40 @@ class YakNetProvider extends AbstractProvider
      */
     public function getLoginButtonHtml(string $state = '', array $options = []): string
     {
-        $clientId = $this->clientId;
-        $redirectUri = $this->redirectUri;
+        $clientId = htmlspecialchars((string) $this->clientId, ENT_QUOTES, 'UTF-8');
+        $redirectUri = htmlspecialchars((string) $this->redirectUri, ENT_QUOTES, 'UTF-8');
         $theme = isset($options['theme']) && is_string($options['theme']) ? $options['theme'] : 'light';
-        $text = isset($options['text']) && is_string($options['text']) ? $options['text'] : 'YakNet ile Giriş Yap';
-        $baseUrl = $this->baseUrl;
+        $text = htmlspecialchars(isset($options['text']) && is_string($options['text']) ? $options['text'] : 'YakNet ile Giriş Yap', ENT_QUOTES, 'UTF-8');
+        $baseUrl = rtrim((string) $this->baseUrl, '/');
+        $stateAttr = htmlspecialchars($state, ENT_QUOTES, 'UTF-8');
+
+        $authUrl = $baseUrl . '/oauth/authorize?client_id=' . urlencode((string) $this->clientId) .
+            '&redirect_uri=' . urlencode((string) $this->redirectUri) .
+            '&response_type=code&scope=&state=' . urlencode($state);
+
+        $isDark = ($theme === 'dark');
+        $bgColor = $isDark ? '#1e293b' : '#ffffff';
+        $textColor = $isDark ? '#ffffff' : '#0f172a';
+        $borderColor = $isDark ? '#334155' : '#cbd5e1';
 
         return <<<HTML
-<script src="{$baseUrl}/js/y-auth-button.js?v=1.1.2" async defer></script>
+<script src="{$baseUrl}/js/y-auth-button.js?v=1.2.0" async defer></script>
 <yaknet-login-button 
     client-id="{$clientId}" 
     redirect-uri="{$redirectUri}" 
-    state="{$state}" 
+    state="{$stateAttr}" 
     theme="{$theme}"
     text="{$text}"
-    base-url="{$baseUrl}">
+    base-url="{$baseUrl}"
+    style="display: block; width: 100%;">
+    <a href="{$authUrl}" class="yaknet-btn" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; background-color: {$bgColor}; color: {$textColor}; border: 1px solid {$borderColor}; padding: 10px 20px; border-radius: 8px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); user-select: none; white-space: nowrap;">
+        <svg style="width: 20px; height: 20px; margin-right: 12px; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#3B82F6"/>
+            <path d="M2 17L12 22L22 17" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {$text}
+    </a>
 </yaknet-login-button>
 HTML;
     }

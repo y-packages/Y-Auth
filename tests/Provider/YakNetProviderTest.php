@@ -154,4 +154,20 @@ class YakNetProviderTest extends TestCase
             'code' => 'invalid_code',
         ]);
     }
+
+    public function testLoginButtonHtml(): void
+    {
+        $html = $this->provider->getLoginButtonHtml('state123', [
+            'theme' => 'dark',
+            'text' => 'YakNet ile Giriş',
+        ]);
+
+        $this->assertStringContainsString('<yaknet-login-button', $html);
+        $this->assertStringContainsString('client-id="mock_client_id"', $html);
+        $this->assertStringContainsString('redirect-uri="https://mock.app/callback"', $html);
+        $this->assertStringContainsString('state="state123"', $html);
+        $this->assertStringContainsString('theme="dark"', $html);
+        $this->assertStringContainsString('YakNet ile Giriş', $html);
+        $this->assertStringContainsString('/oauth/authorize?client_id=mock_client_id', $html);
+    }
 }
