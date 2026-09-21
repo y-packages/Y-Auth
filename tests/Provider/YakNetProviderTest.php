@@ -21,7 +21,7 @@ class YakNetProviderTest extends TestCase
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'https://mock.app/callback',
-            'baseUrl' => 'https://auth.yakhub.com.tr',
+            'baseUrl' => 'https://developer-console.yakhub.com.tr',
         ]);
     }
 

@@ -1,6 +1,6 @@
 # YakNet Auth Client SDK (`yaknet/y-auth`)
 
-Official PHP integration SDK for the **YakNet Identity Verification Platform** (`auth.yakhub.com.tr`). This library is built on top of the robust and secure `league/oauth2-client` standard.
+Official PHP integration SDK for the **YakNet Identity Verification Platform** (`developer-console.yakhub.com.tr`). This library is built on top of the robust and secure `league/oauth2-client` standard.
 
 ---
 
@@ -27,8 +27,8 @@ $provider = new YakNetProvider([
     'clientId'     => 'your-client-id',
     'clientSecret' => 'your-client-secret',
     'redirectUri'  => 'https://your-app.com/callback',
-    // Optional: Defaults to https://auth.yakhub.com.tr
-    'baseUrl'      => 'https://auth.yakhub.com.tr'
+    // Optional: Defaults to https://developer-console.yakhub.com.tr
+    'baseUrl'      => 'https://developer-console.yakhub.com.tr'
 ]);
 ```
 

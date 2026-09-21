@@ -9,7 +9,7 @@ $provider = new YakNetProvider([
     'clientId'     => 'test-client-id-12345',
     'clientSecret' => 'test-client-secret-abcde',
     'redirectUri'  => 'https://my-awesome-app.com/callback',
-    'baseUrl'      => 'https://auth.yakhub.com.tr'
+    'baseUrl'      => 'https://developer-console.yakhub.com.tr'
 ]);
 
 // Generate state

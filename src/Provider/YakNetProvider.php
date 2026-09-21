@@ -13,9 +13,9 @@ class YakNetProvider extends AbstractProvider
     use BearerAuthorizationTrait;
 
     /**
-     * Base URL for the YakNet Auth server.
+     * Base URL for the YakNet Developer Console server.
      */
-    protected string $baseUrl = 'https://auth.yakhub.com.tr';
+    protected string $baseUrl = 'https://developer-console.yakhub.com.tr';
 
     /**
      * Constructs the provider instance.
